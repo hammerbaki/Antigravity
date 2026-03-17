@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>바이브 코딩 앱 개발</title>
+    <!-- 구글 폰트 적용 (현대적이고 세련된 느낌의 Noto Sans KR) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&family=Outfit:wght@700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            /* 고급스러운 딥 블루 다크 모드 색상 테마 */
+            --bg-gradient-start: #020617;
+            /* 깊은 남색 */
+            --bg-gradient-end: #0f172a;
+            /* 어두운 슬레이트 블루 */
+            --text-glow-color: rgba(59, 130, 246, 0.6);
+            /* 블루 글로우 효과 */
+            --gradient-text-start: #3b82f6;
+            /* 생동감 있는 파란색 */
+            --gradient-text-end: #22d3ee;
+            /* 시원한 시안색 */
+            --subtext-color: #94a3b8;
+            /* 차분한 회색조 */
+        }
+
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            font-family: 'Outfit', 'Noto Sans KR', sans-serif;
+            overflow: hidden;
+        }
+
+        /* 중앙 컨테이너 설정 - 글래스모피즘 효과 적용 */
+        .container {
+            text-align: center;
+            padding: 4rem 5rem;
+            border-radius: 32px;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(59, 130, 246, 0.15);
+            /* 컨테이너 테두리도 파란색 계열로 맞춰줌 */
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+
+            /* 부드러운 등장 애니메이션 */
+            opacity: 0;
+            transform: translateY(40px);
+            animation: slideUpFade 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* 메인 텍스트 스타일링 */
+        h1 {
+            margin: 0;
+            font-size: 5.5rem;
+            /* 글자 크기 대폭 확대 (기존 4rem -> 5.5rem) */
+            font-weight: 900;
+            letter-spacing: -0.05em;
+            line-height: 1.2;
+            /* 두 줄 간격 부드럽게 조정 */
+
+            /* 파란색 그라데이션 텍스트 처리 */
+            background: linear-gradient(to right bottom, var(--gradient-text-start), var(--gradient-text-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+            cursor: default;
+            transition: transform 0.4s ease, filter 0.4s ease;
+            position: relative;
+        }
+
+        /* 텍스트 호버 마이크로 애니메이션 효과 */
+        h1:hover {
+            transform: scale(1.03);
+            filter: drop-shadow(0 0 35px var(--text-glow-color));
+        }
+
+        /* 하단 서브 텍스트(작은 글씨) 스타일링 */
+        p.subtext {
+            margin-top: 2rem;
+            font-size: 1.2rem;
+            color: var(--subtext-color);
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            /* 작은 글씨는 살짝 늦게 나타나는 효과 */
+            opacity: 0;
+            animation: fadeIn 1.5s ease 0.6s forwards;
+        }
+
+        @keyframes slideUpFade {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* 배경 장식용 블롭(Blob) 애니메이션 요소 - 파란색 테마에 맞춤 */
+        .blob {
+            position: absolute;
+            filter: blur(120px);
+            z-index: -1;
+            opacity: 0.4;
+            animation: float 14s infinite ease-in-out alternate;
+        }
+
+        /* 파란색 빛 */
+        .blob-1 {
+            width: 500px;
+            height: 500px;
+            background: #1d4ed8;
+            top: -150px;
+            left: -200px;
+            border-radius: 50%;
+        }
+
+        /* 시안(밝은 파랑) 빛 */
+        .blob-2 {
+            width: 600px;
+            height: 600px;
+            background: #06b6d4;
+            bottom: -250px;
+            right: -200px;
+            border-radius: 50%;
+            animation-delay: -7s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) scale(1) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(60px, -60px) scale(1.15) rotate(10deg);
+            }
+        }
+
+        /* 모바일 반응형 처리 */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3.5rem;
+                /* 모바일에서도 적절히 크게 */
+            }
+
+            .container {
+                padding: 3rem 2rem;
+                margin: 0 1.5rem;
+            }
+
+            p.subtext {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="container">
+        <!-- 메인 타이틀 한 줄로 표시 -->
+        <h1>바이브코딩 앱 개발</h1>
+        <p class="subtext">환영합니다. 당신의 상상력을 펼쳐보세요</p>
+    </div>
+</body>
+
+</html>
